@@ -10,8 +10,6 @@ public class Human implements Serializable {
     private Human mother;
     private Human father;
     private List<Human> children;
-
-
     private Gender sex;
     private LocalDate birthday;
     private LocalDate deathDate;
@@ -27,9 +25,10 @@ public class Human implements Serializable {
         this.deathDate = deathDate;
     }
 
-    public Human(String name, Gender sex) {
+    public Human(String name, Gender sex, LocalDate birthday) {
         this.name = name;
         this.sex = sex;
+        this.birthday = birthday;
         children = new ArrayList<>();
     }
 
@@ -99,6 +98,8 @@ public class Human implements Serializable {
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
+        sb.append(", ");
+        sb.append(birthday);
         return sb.toString();
     }
 
@@ -166,6 +167,5 @@ public class Human implements Serializable {
 enum Gender {
     male, female
 }
-
 
 
