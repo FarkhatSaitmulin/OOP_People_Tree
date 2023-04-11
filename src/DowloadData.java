@@ -1,7 +1,7 @@
 
 import java.io.*;
 
-public class DowloadData {
+public class DowloadData implements InOut {
     public void save(FamilyTree family, String str) {
 
         try {
@@ -12,8 +12,6 @@ public class DowloadData {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public FamilyTree load(String str) {

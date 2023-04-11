@@ -92,13 +92,13 @@ public class Human implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("имя: ");
         sb.append(name);
-        sb.append(", ");
+        sb.append(" ");
         sb.append(getMotherInfo());
         sb.append(", ");
         sb.append(getFatherInfo());
         sb.append(", ");
         sb.append(getChildrenInfo());
-        sb.append(", ");
+        sb.append(" ");
         sb.append(birthday);
         return sb.toString();
     }
@@ -167,5 +167,3 @@ public class Human implements Serializable {
 enum Gender {
     male, female
 }
-
-

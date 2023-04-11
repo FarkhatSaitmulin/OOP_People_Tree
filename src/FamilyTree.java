@@ -1,12 +1,14 @@
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class FamilyTree implements Serializable {
-    private List<Human> humanList;
+public class FamilyTree<T extends Human> implements Serializable, Iterable<T> {
 
-    public FamilyTree(List<Human> humanList) {
+    private List<T> humanList;
+
+    public FamilyTree(List<T> humanList) {
         this.humanList = humanList;
     }
 
@@ -14,44 +16,59 @@ public class FamilyTree implements Serializable {
         this(new ArrayList<>());
     }
 
-    public List<Human> getHumanList() {
+    public List<T> getHumanList() {
         return humanList;
     }
 
-
-
-    public void setHumanList(List<Human> humanList) {
+    public void setHumanList(List<T> humanList) {
         this.humanList = humanList;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Human item : humanList) {
+        for (T item : humanList) {
             sb.append(item.toString());
             sb.append("\n");
         }
         return sb.toString();
     }
 
-    public void addHuman(Human human) {
+    public void addHuman(T human) {
         if (!humanList.contains(human)) {
             humanList.add(human);
             if (human.getFather() != null) {
                 human.getFather().addChild(human);
             }
-            if (human.getMother() != null){
+            if (human.getMother() != null) {
                 human.getMother().addChild(human);
             }
         }
     }
 
-    public Human getByName (String name){
-        for (Human human: humanList){
-            if (human.getName().equals(name)){
+    public void removeHuman(T human) {
+        if (human.getMother() != null){
+            human.getMother().getChildren().remove(human);
+        }
+        if (human.getFather() != null) {
+            human.getFather().getChildren().remove(human);
+        }
+        humanList.remove(human);
+    }
+
+
+    public T getByName(String name) {
+        for (T human : humanList) {
+            if (human.getName().equals(name)) {
                 return human;
             }
         }
         return null;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new FamilyIterator(humanList);
+    }
+
 }
 
