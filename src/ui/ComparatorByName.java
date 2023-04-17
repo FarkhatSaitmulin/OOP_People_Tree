@@ -1,3 +1,5 @@
+package ui;
+
 import java.util.Comparator;
 
 public class ComparatorByName  implements Comparator<Human> {
